@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#ffffff">
   <title>Boy or Girl?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Luckiest+Guy" rel="stylesheet">
@@ -28,30 +29,31 @@
 
     const button = document.getElementById('start')
     const buttonWrap = document.querySelector('.button-wrap')
+    const themeMeta = document.querySelector('meta[name="theme-color"]')
     const start = e => {
       button.classList.add('start')
       buttonWrap.classList.add('out')
 
       setTimeout(() => {
-        roulette(1)
+        roulette(1, 100)
       }, 750)
     }
 
-    const roulette = index => {
-      if (index > 30) {
-        return setTimeout(party, 3500)
+    const roulette = (index, delay) => {
+      if (index > 58) {
+        return setTimeout(party, 3000)
       }
 
       const oldClass = index % 2 !== 0 ? 'pink' : 'blue'
       const newClass = index % 2 !== 0 ? 'blue' : 'pink'
-      // const delay = index * 10
-      const delay = Math.pow(index, 2) * 1.5
+      const themeColor = index % 2 !== 0 ? '#89cff0' : '#f089cf'
       console.log(delay)
 
       setTimeout(() => {
         document.body.classList.remove(oldClass)
         document.body.classList.add(newClass)
-        roulette(index + 1)
+        themeMeta.setAttribute('content', themeColor)
+        roulette(index + 1, index > 40 ? delay * 1.2 : 100)
       }, delay)
     }
 
