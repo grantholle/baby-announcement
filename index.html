@@ -29,7 +29,6 @@
 
     const button = document.getElementById('start')
     const buttonWrap = document.querySelector('.button-wrap')
-    const themeMeta = document.querySelector('meta[name="theme-color"]')
     const start = e => {
       button.classList.add('start')
       buttonWrap.classList.add('out')
@@ -52,7 +51,6 @@
       setTimeout(() => {
         document.body.classList.remove(oldClass)
         document.body.classList.add(newClass)
-        themeMeta.setAttribute('content', themeColor)
         roulette(index + 1, index > 40 ? delay * 1.2 : 100)
       }, delay)
     }
@@ -60,6 +58,8 @@
     const party = () => {
       document.body.classList.remove('pink')
       document.body.classList.add('blue', 'party')
+      document.querySelector('meta[name="theme-color"]')
+        .setAttribute('content', '#89cff0')
     }
 
     button.addEventListener('click', start)
